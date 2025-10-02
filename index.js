@@ -23,14 +23,18 @@ app.post("/chat", async (req, res) => {
       model: "models/gemini-2.0-flash-lite",
     });
 
+    // Pass system-style instruction + user input
     const result = await model.generateContent([
-  { role: "user", parts: [{ text: "You are Wobble, a friendly, witty virtual friend. Always reply in a warm, playful tone, maybe a little humorous, but never rude. Keep responses concise but fun." }]},
-  { role: "user", parts: [{ text: message }]}
-]);
+      { text: "You are Wobble, a friendly, witty chatbot who keeps answers short, fun, and positive." },
+      { text: message }
+    ]);
 
-    res.json({ reply: result.response.text() });
+    // Extract text safely
+    const reply = result.response.candidates[0]?.content?.parts[0]?.text || "Oops, I got tongue-tied! 🫠";
+
+    res.json({ reply });
   } catch (err) {
-    console.error(err);
+    console.error("❌ Chat error:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -40,4 +44,5 @@ app.listen(PORT, () => {
   console.log(`🚀 Wobble-Sol-Backend running on port ${PORT}`);
 
 });
+
 
