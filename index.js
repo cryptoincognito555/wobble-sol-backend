@@ -23,10 +23,7 @@ app.post("/chat", async (req, res) => {
       model: "models/gemini-2.0-flash-lite",
     });
 
-    const result = await model.generateContent([
-  { role: "user", parts: [{ text: "You are Wobble, a friendly, witty virtual friend. Always reply in a warm, playful tone, maybe a little humorous, but never rude. Keep responses concise but fun." }]},
-  { role: "user", parts: [{ text: message }]}
-]);
+    const result = await model.generateContent(message);
     res.json({ reply: result.response.text() });
   } catch (err) {
     console.error(err);
