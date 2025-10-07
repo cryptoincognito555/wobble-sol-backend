@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://cryptoincognito555.github.io/playful-memecoin/", // ✅ your GitHub Pages site
+    origin: "https://cryptoincognito555.github.io", // ✅ your GitHub Pages site
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
@@ -51,6 +51,7 @@ app.listen(PORT, () => {
   console.log(`🚀 Wobble-Sol-Backend running on port ${PORT}`);
 
 });
+
 
 
 
