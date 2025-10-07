@@ -7,7 +7,14 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // Allow frontend requests
+app.use(
+  cors({
+    origin: "https://cryptoincognito555.github.io/playful-memecoin/", // ✅ your GitHub Pages site
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
 
 // Load Gemini API Key from environment variables
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
@@ -44,5 +51,6 @@ app.listen(PORT, () => {
   console.log(`🚀 Wobble-Sol-Backend running on port ${PORT}`);
 
 });
+
 
 
