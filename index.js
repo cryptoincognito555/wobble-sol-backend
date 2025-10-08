@@ -58,3 +58,11 @@ User: ${message}
   }
 });
 
+// ✅ Use dynamic Render port
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Wobble-Sol-Backend running on port ${PORT}`);
+});
+
+
+
