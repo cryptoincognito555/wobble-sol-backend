@@ -1,3 +1,24 @@
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+
+// ✅ Allow your frontend site
+app.use(
+  cors({
+    origin: "https://cryptoincognito555.github.io",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
 app.post("/chat", async (req, res) => {
   try {
     const { message } = req.body;
@@ -36,3 +57,4 @@ User: ${message}
     res.status(500).json({ error: err.message });
   }
 });
+
